@@ -7,8 +7,8 @@
     Warsaw University of Technology
     Faculty of Electronics and Information Technology
 """
-from src.individual import Individual
-from src.population import Population
+from .individual import Individual
+from .population import Population
 import random
 
 POPULATION_SIZE = 100
@@ -61,7 +61,7 @@ def mate(parent1, parent2):
     return Individual(child_chromosome)
 
 
-def evolution(population, found):
+def evolution(population):
     global FOUND
     population.members = sorted(population.members, key=lambda x: x.fitness)
 
@@ -93,14 +93,14 @@ def evolution(population, found):
                   population.members[0].fitness))
 
 
-def main():
+def run_evolution():
     global POPULATION_SIZE
     global FOUND
 
     population = rand_population(POPULATION_SIZE)
 
     while not FOUND:
-        evolution(population, FOUND)
+        evolution(population)
 
     print("Generation: {}\tString: {}\tFitness: {}"
           .format(population.generation,
@@ -108,5 +108,4 @@ def main():
                   population.members[0].fitness))
 
 
-if __name__ == '__main__':
-    main()
+run_evolution()
