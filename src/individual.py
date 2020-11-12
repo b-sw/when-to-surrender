@@ -9,24 +9,14 @@
 """
 import random
 
-GNOME_LEN = 12
-GENES = '''abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP 
-QRSTUVWXYZ 1234567890, .-;:_!"#%&/()=?@${[]}'''
-
 
 class Individual:
-
     fitness = 0
 
-    def __init__(self, chromosome):
-        self.chromosome = chromosome
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
     @classmethod
-    def rand_gene(cls):
-        global GENES
-        gene = random.choice(GENES)
-        return gene
-
-    @classmethod
-    def rand_gnome(cls):
-        return [cls.rand_gene() for _ in range(GNOME_LEN)]
+    def rand_genome(cls, x_left_lim, x_right_lim, y_left_lim, y_right_lim):
+        return cls(random.uniform(x_left_lim, x_right_lim), random.uniform(y_left_lim, y_right_lim))
