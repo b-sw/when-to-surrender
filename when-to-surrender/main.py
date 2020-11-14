@@ -10,7 +10,7 @@
 
 from population import *
 
-POPULATION_SIZE = 100
+POPULATION_SIZE = 50
 ACKLEY_LEFT_LIM = -5
 ACKLEY_RIGHT_LIM = 5
 
@@ -33,6 +33,8 @@ def main():
                       population.members[0].x[0],
                       population.members[0].x[1],
                       population.members[0].fitness))
+        if population.members[0].fitness == 0:
+            break
 
 
 if __name__ == '__main__':
