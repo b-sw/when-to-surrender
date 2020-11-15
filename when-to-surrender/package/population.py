@@ -21,10 +21,10 @@ def select(population, how_many):
     return tmp_generation
 
 
-def mate(members, how_many):
+def mate(members):
     children = []
     # average with random weight
-    for _ in range(how_many):
+    for _ in members:
         child_genotype = []
         parent_1 = random.choice(members)
         parent_2 = random.choice(members)
@@ -45,13 +45,13 @@ def mutate(population):
 
 
 def succession(population, children, population_size):
-    population.members.extend(children)
-    population.members = sorted(population.members, key=lambda x: x.fitness)
-    population.members = population.members[:population_size]
+    next_generation = population.members + children
+    next_generation = sorted(next_generation, key=lambda x: x.fitness)
+    return next_generation[:population_size]
 
 
 class Population:
-    generation = 1
+    generation = 0
 
     def __init__(self, members):
         self.members = members
