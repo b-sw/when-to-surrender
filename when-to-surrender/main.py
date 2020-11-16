@@ -7,40 +7,34 @@
     Warsaw University of Technology
     Faculty of Electronics and Information Technology
 """
+import optproblems
+import optproblems.cec2005
 
+from genotype import *
 from population import *
 
-MU = 50
+MU = 20
 LAMBDA = 5 * MU
-
-POPULATION_SIZE = MU
-ACKLEY_LEFT_LIM = -5
-ACKLEY_RIGHT_LIM = 5
+F6_BOUND = 100
 
 
-def evolution(population):
+def evolution(population, function):
     selection = select(population, LAMBDA)
-    offspring = mate(selection)
+    offspring = mate(selection, function)
     # todo: mutate
-    # todo: fitness(offspring)
     population.members = succession(population, offspring, MU)
     population.generation += 1
 
 
 def main():
-    population = Population.rand_population(POPULATION_SIZE, ACKLEY_LEFT_LIM, ACKLEY_RIGHT_LIM,
-                                            ACKLEY_LEFT_LIM, ACKLEY_RIGHT_LIM)
-    # todo: fitness(population)
+    f6 = optproblems.cec2005.F6(DIMENSION)
+    population = Population.rand_population(MU, f6, F6_BOUND)
+
     while population.generation != 100:
-        evolution(population)
-        print("Generation: {}\tX: {}\tY: {}\tFitness: {}"
-              .format(population.generation,
-                      population.members[0].x[0],
-                      population.members[0].x[1],
-                      population.members[0].fitness))
-        # todo: find a surrender strategy
-        if population.members[0].fitness == 0:
-            break
+        evolution(population, f6)
+
+        print("Generation: {}\tBest individual's fitness: {}"
+              .format(population.generation, population.members[0].fitness))
 
 
 if __name__ == '__main__':
