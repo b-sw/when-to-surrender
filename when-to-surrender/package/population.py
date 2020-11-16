@@ -7,9 +7,11 @@
     Warsaw University of Technology
     Faculty of Electronics and Information Technology
 """
-from individual import Individual
-from fitness import ackley_fitness
 import random
+import optproblems
+import optproblems.cec2005
+
+from genotype import *
 
 
 def select(population, how_many):
@@ -21,33 +23,34 @@ def select(population, how_many):
     return tmp_generation
 
 
-def mate(members, how_many):
-    children = []
+def mate(members, function):
+    children_genotypes = []
     # average with random weight
-    for _ in range(how_many):
-        child_genotype = []
+    for _ in members:
+        child_chromosome = []
         parent_1 = random.choice(members)
         parent_2 = random.choice(members)
         weight = random.uniform(0, 1)
 
-        for i in range(len(parent_1.x)):
-            child_genotype.append(weight * parent_1.x[i] + (1 - weight) * parent_2.x[i])
+        for i in range(DIMENSION):
+            child_chromosome.append(weight * parent_1.chromosome[i] + (1 - weight) * parent_2.chromosome[i])
 
-        child = Individual(child_genotype)
-        child.fitness = ackley_fitness(child)
-        children.append(child)
+        child = optproblems.base.Individual(child_chromosome)
+        function.evaluate(child)
+        child_genotype = Genotype(child_chromosome, child.objective_values)
+        children_genotypes.append(child_genotype)
 
-    return children
+    return children_genotypes
 
 
 def mutate(population):
-    return population
+    pass
 
 
 def succession(population, children, population_size):
-    population.members.extend(children)
-    population.members = sorted(population.members, key=lambda x: x.fitness)
-    population.members = population.members[:population_size]
+    next_generation = population.members + children
+    next_generation = sorted(next_generation, key=lambda x: x.fitness)
+    return next_generation[:population_size]
 
 
 class Population:
@@ -57,12 +60,20 @@ class Population:
         self.members = members
 
     @classmethod
-    def rand_population(cls, size, x_left_lim, x_right_lim, y_left_lim, y_right_lim):
-        members = []
+    def rand_population(cls, size, function, bound):        # single bound because most functions in the benchmark
+        members = []                                        # have bounds of additive inverses [-x,x]
 
-        for _ in range(size):
-            member = Individual.rand_genome(x_left_lim, x_right_lim, y_left_lim, y_right_lim)
-            member.fitness = ackley_fitness(member)
-            members.append(member)
+        for j in range(size):
+            x = []
+            for i in range(DIMENSION):
+                x.append(random.uniform(-bound, bound))
+
+            individual = optproblems.base.Individual(x)
+            function.evaluate(individual)
+            fitness = individual.objective_values
+            #print("Individual {}\t Fitness: {}\tX: {}"
+            #      .format(j, fitness, x))
+            genotype = Genotype(x, fitness)
+            members.append(genotype)
 
         return cls(members)
