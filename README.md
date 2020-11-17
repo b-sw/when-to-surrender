@@ -1,5 +1,27 @@
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
+
+* [Authors](#authors)
+* [Description of the Problem](#description)
+* [Run guide](#run-guide)
+* [Useful docs](#useful-docs)
+
+## Authors
+Piotr Frątczak 300207
+
+Bartosz Świtalski 300279
+
+## Description
 W optymalizacji za pomocą algorytmów ewolucyjnych ze względów czasowych ogranicza się liczbę iteracji. Często zdarza się jednak, że liczba ta nie jest sensownie wykorzystywana, ponieważ algorytm utyka w optimum lokalnym i stara się je jak najdokładniej zlokalizować. Rozwiązaniem może być wykrycie bezsensowności dalszej pracy i restart algorytmu. Zaproponować, zaimplementować i przebadać strategię wykrywania bezcelowości dalszej pracy. Przed rozpoczęciem realizacji projektu proszę zapoznać się z zawartością [strony](http://staff.elka.pw.edu.pl/~rbiedrzy/PSZT/index.html).
 
+## Run guide
+```
+git clone https://github.com/bartoszswitalski/when-to-surrender.git
+```
+```
+/when-to-surrender$ python3 main.py
+```
+## Useful docs
 Wartościowy artykuł: https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.384.4126&rep=rep1&type=pdf
 
   We note that for EAs it is not necessary to restart the
