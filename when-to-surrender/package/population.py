@@ -43,8 +43,24 @@ def mate(members, function):
     return children_genotypes
 
 
-def mutate(population):
-    pass
+def mutate(genotypes, function, bounds):
+    for i in range(len(genotypes)):
+        for j in range(DIMENSION):
+            x_j = genotypes[i].chromosome[j]
+            sigma_j = genotypes[i].sigma[j]
+            x_j = x_j + sigma_j * numpy.random.normal(0, 1)
+            if x_j > bounds:
+                x_j = bounds
+            elif x_j < -bounds:
+                x_j = -bounds
+            genotypes[i].chromosome[j] = x_j
+
+        individual = optproblems.base.Individual(genotypes[i].chromosome)
+        function.evaluate(individual)
+
+        genotypes[i].fitness = individual.objective_values
+
+    return genotypes
 
 
 def succession(population, children, population_size):

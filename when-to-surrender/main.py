@@ -10,8 +10,8 @@
 import optproblems
 import optproblems.cec2005
 
-from genotype import *
 from population import *
+
 
 MU = 20
 LAMBDA = 5 * MU
@@ -21,7 +21,8 @@ F6_BOUND = 100
 def evolution(population, function):
     selection = select(population, LAMBDA)
     offspring = mate(selection, function)
-    # todo: mutate
+    population.members = mutate(population.members, function, F6_BOUND)
+    offspring = mutate(offspring, function, F6_BOUND)
     population.members = succession(population, offspring, MU)
     population.generation += 1
 
