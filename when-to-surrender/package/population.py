@@ -22,7 +22,7 @@ def evolution(population, function, bounds):
     offspring = mate(selection, function)
     population.members = mutate(population.members, function, bounds)
     offspring = mutate(offspring, function, bounds)
-    population.members = succession(population, offspring, MU)
+    population.members = succession(population.members, offspring, MU)
     population.generation += 1
 
 
@@ -75,8 +75,8 @@ def mutate(genotypes, function, bounds):
     return genotypes
 
 
-def succession(population, children, population_size):
-    next_generation = population.members + children
+def succession(current_generation, children, population_size):
+    next_generation = current_generation + children
     next_generation = sorted(next_generation, key=lambda x: x.fitness)
     return next_generation[:population_size]
 
@@ -99,8 +99,6 @@ class Population:
             individual = optproblems.base.Individual(x)
             function.evaluate(individual)
             fitness = individual.objective_values
-            #print("Individual {}\t Fitness: {}\tX: {}"
-            #      .format(j, fitness, x))
             genotype = Genotype(x, fitness)
             members.append(genotype)
 
