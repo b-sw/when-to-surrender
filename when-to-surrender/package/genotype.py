@@ -1,6 +1,6 @@
 """
-    Name:
-    Purpose:
+    Name: genotype.py
+    Purpose: (mu + lambda) evolutionary strategy
 
     @author
 

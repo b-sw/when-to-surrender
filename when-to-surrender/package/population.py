@@ -1,6 +1,6 @@
 """
-    Name:
-    Purpose:
+    Name: population.py
+    Purpose: defining population and its methods(e.g. selection, mating, mutating)
 
     @author
 
@@ -11,7 +11,19 @@ import random
 import optproblems
 import optproblems.cec2005
 
-from genotype import *
+from package.genotype import *
+
+MU = 20
+LAMBDA = 5 * MU
+
+
+def evolution(population, function, bounds):
+    selection = select(population, LAMBDA)
+    offspring = mate(selection, function)
+    population.members = mutate(population.members, function, bounds)
+    offspring = mutate(offspring, function, bounds)
+    population.members = succession(population, offspring, MU)
+    population.generation += 1
 
 
 def select(population, how_many):

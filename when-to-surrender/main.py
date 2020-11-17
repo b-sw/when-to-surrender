@@ -1,5 +1,5 @@
 """
-    Name:
+    Name: main.py
     Purpose:
 
     @author
@@ -10,32 +10,21 @@
 import optproblems
 import optproblems.cec2005
 
-from population import *
+from package.test import *
 
-
-MU = 20
-LAMBDA = 5 * MU
 F6_BOUND = 100
-
-
-def evolution(population, function):
-    selection = select(population, LAMBDA)
-    offspring = mate(selection, function)
-    population.members = mutate(population.members, function, F6_BOUND)
-    offspring = mutate(offspring, function, F6_BOUND)
-    population.members = succession(population, offspring, MU)
-    population.generation += 1
+F9_BOUND = 5
+F12_BOUND = math.pi
 
 
 def main():
     f6 = optproblems.cec2005.F6(DIMENSION)
-    population = Population.rand_population(MU, f6, F6_BOUND)
+    f9 = optproblems.cec2005.F9(DIMENSION)
+    f12 = optproblems.cec2005.F12(DIMENSION)
 
-    while population.generation != 100:
-        evolution(population, f6)
-
-        print("Generation: {}\tBest individual's fitness: {}"
-              .format(population.generation, population.members[0].fitness))
+    # optimize(f6, F6_BOUND)
+    optimize(f9, F9_BOUND)
+    # optimize(f12, F12_BOUND)
 
 
 if __name__ == '__main__':
