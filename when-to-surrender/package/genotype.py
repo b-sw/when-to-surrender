@@ -19,6 +19,7 @@ SIGMA = 1
 
 
 def next_sigma(sigma, a):
+
     b = numpy.random.normal(0, 1)
     tau = 1 / math.sqrt(2 * DIMENSION)
     tau_prim = 1 / math.sqrt(2 * math.sqrt(DIMENSION))

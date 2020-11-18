@@ -11,20 +11,18 @@ import optproblems
 import optproblems.cec2005
 
 from package.test import *
+from package.visuals import *
 
-F6_BOUND = 100
-F9_BOUND = 5
-F12_BOUND = math.pi
+F4_BOUND = 100
 
 
 def main():
-    f6 = optproblems.cec2005.F6(DIMENSION)
-    f9 = optproblems.cec2005.F9(DIMENSION)
-    f12 = optproblems.cec2005.F12(DIMENSION)
 
-    # optimize(f6, F6_BOUND)
-    optimize(f9, F9_BOUND)
-    # optimize(f12, F12_BOUND)
+    f4 = optproblems.cec2005.F4(DIMENSION)
+
+    data = optimize(f4, F4_BOUND)
+    plot_graph(data[0], data[1], 'Best fit', 'generation', 'minVal')
+    plot_graph(data[0], data[2][0], 'Standard deviation', 'generation', 'sigma(x0)')
 
 
 if __name__ == '__main__':

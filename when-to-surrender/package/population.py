@@ -18,6 +18,7 @@ LAMBDA = 5 * MU
 
 
 def evolution(population, function, bounds):
+
     selection = select(population, LAMBDA)
     offspring = mate(selection, function)
     population.members = mutate(population.members, function, bounds)
@@ -27,6 +28,7 @@ def evolution(population, function, bounds):
 
 
 def select(population, how_many):
+
     tmp_generation = []
 
     for _ in range(how_many):
@@ -36,6 +38,7 @@ def select(population, how_many):
 
 
 def mate(members, function):
+
     children_genotypes = []
     # average with random weight
     for _ in members:
@@ -56,6 +59,7 @@ def mate(members, function):
 
 
 def mutate(genotypes, function, bounds):
+
     for i in range(len(genotypes)):
         for j in range(DIMENSION):
             x_j = genotypes[i].chromosome[j]
@@ -76,12 +80,15 @@ def mutate(genotypes, function, bounds):
 
 
 def succession(current_generation, children, population_size):
+
     next_generation = current_generation + children
     next_generation = sorted(next_generation, key=lambda x: x.fitness)
+
     return next_generation[:population_size]
 
 
 class Population:
+
     generation = 1
 
     def __init__(self, members):
@@ -89,6 +96,7 @@ class Population:
 
     @classmethod
     def rand_population(cls, size, function, bound):        # single bound because most functions in the benchmark
+
         members = []                                        # have bounds of additive inverses [-x,x]
 
         for j in range(size):
@@ -101,5 +109,7 @@ class Population:
             fitness = individual.objective_values
             genotype = Genotype(x, fitness)
             members.append(genotype)
+
+        members = sorted(members, key=lambda m: m.fitness)
 
         return cls(members)
