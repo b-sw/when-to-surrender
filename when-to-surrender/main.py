@@ -25,5 +25,12 @@ def main():
     plot_graph(data[0], data[2][0], 'Standard deviation', 'generation', 'sigma(x0)')
 
 
+def multi():
+    f4 = optproblems.cec2005.F4(DIMENSION)
+    return optimize(f4, F4_BOUND)
+
+
 if __name__ == '__main__':
     main()
+else:
+    multi()
