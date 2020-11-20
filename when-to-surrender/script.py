@@ -7,15 +7,27 @@
     Warsaw University of Technology
     Faculty of Electronics and Information Technology
 """
-from main import *
+from package.test import *
 
-ITERATIONS = 2
+ITERATIONS = 3
+
 
 def main():
-    data = []
+    runs = []
 
-    for _ in range(ITERATIONS-1):
-        data.append(multi())
+    for _ in range(ITERATIONS):
+        runs.append(Data(run_cec()))
+
+    # for i in range(ITERATIONS):
+    #     runs[i].plot_graphs()
+
+    mean_score = merge_data(runs)
+
+    print("No runs: {}\t|\tGenerations mean: {}\t|\tBest fit mean: {}"
+          .format(ITERATIONS,
+                  round(mean_score[GENERATIONS_IDX], DECIMAL_POINTS),
+                  round(mean_score[BEST_FIT_IDX], DECIMAL_POINTS)))
+
 
 if __name__ == '__main__':
     main()
