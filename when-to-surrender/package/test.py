@@ -17,36 +17,87 @@ from package.visuals import *
 
 DECIMAL_POINTS = 2
 F4_BOUND = 100
-EPSILON_DEVIATION = 40
+F5_BOUND = 100
+F6_BOUND = 100
+EPSILON_DEVIATION = 0.7
+K_ITERATIONS = 10
+BUDGET = 10000 * DIMENSION
+
+SD_CRIT = 0
+K_ITER_CRIT = 1
+
+# F4 = 0
+# F5 = 0
+# F6 = 0
 
 
-def run_cec():
-    f5 = optproblems.cec2005.F4(DIMENSION)  # Schwefel's Problem 2.6 with Global Optimum on Bounds
-    return optimize(f5, F4_BOUND)
+def show_test_output():
+    pass
 
 
-def optimize(function, bounds):
+def run_tests():
+    pass
+
+
+def run_cec(which):
+
+    # cec_data = []
+
+    f4 = optproblems.cec2005.F4(DIMENSION)  # Shifted Schwefel’s Problem 1.2 with Noise in Fitness
+    # f5 = optproblems.cec2005.F5(DIMENSION)  # Schwefel’s Problem 2.6 with Global Optimum on Bounds
+    # f6 = optproblems.cec2005.F6(DIMENSION)  # Shifted Rosenbrock’s Function
+
+    if which == SD_CRIT:
+        return optimize(f4, F4_BOUND, run_by_sd_criterion)
+    elif which == K_ITER_CRIT:
+        return optimize(f4, F4_BOUND, run_by_k_iterations_criterion)
+
+
+def optimize(function, bounds, criterion):
     population = Population.rand_population(MU, function, bounds)
 
-    best_evals = []
     generations = []
-    std_deviation = []
+    best_evals = []
+    number_of_evals = MU  # MU is the number of P0 evals
 
-    for i in range(DIMENSION):
-        std_deviation.append([])
+    [generations, best_evals, number_of_evals] = criterion(function, bounds, population, generations,
+                                                           best_evals, number_of_evals)
 
-    while population.generation != 100 and not(standard_deviation_criterion(population, EPSILON_DEVIATION)):
-        print(population.generation)
+    # print('Best eval: {}\t|\tNumber of generations: {}'.format(population.members[0].fitness, population.generation))
+
+    return [generations, best_evals, number_of_evals]
+
+
+def run_by_sd_criterion(function, bounds, population, generations,
+                        best_evals, number_of_evals):
+    while (number_of_evals + MU + LAMBDA) < BUDGET \
+            and not (check_sd_criterion(population, EPSILON_DEVIATION)):
         generations.append(population.generation)
         best_evals.append(population.members[0].fitness)
 
-        tmp_sd = standard_deviation(population)
-        for i in range(DIMENSION):
-            std_deviation[i].append(tmp_sd[i])
+        evolution(population, function, bounds)
+
+        number_of_evals += (MU + LAMBDA)
+
+    return [generations, best_evals, number_of_evals]
+
+
+def run_by_k_iterations_criterion(function, bounds, population, generations,
+                                  best_evals, number_of_evals):
+    k_best_fit = population.members[0].fitness
+    k_best_gen = population.generation
+
+    while (number_of_evals + MU + LAMBDA) < BUDGET \
+            and not(check_k_iterations_criterion(k_best_fit, k_best_gen, K_ITERATIONS, population)):
+        generations.append(population.generation)
+        best_evals.append(population.members[0].fitness)
 
         evolution(population, function, bounds)
 
-        if standard_deviation_criterion(population, EPSILON_DEVIATION):
-            break
+        number_of_evals += (MU + LAMBDA)
 
-    return [generations, best_evals]
+        if population.members[0].fitness < k_best_fit:
+            k_best_fit = population.members[0].fitness
+            k_best_gen = population.generation
+
+    return [generations, best_evals, number_of_evals]

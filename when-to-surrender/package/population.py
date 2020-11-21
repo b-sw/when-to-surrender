@@ -14,11 +14,10 @@ import optproblems.cec2005
 from package.genotype import *
 
 MU = 20
-LAMBDA = 5 * MU
+LAMBDA = 7 * MU
 
 
 def evolution(population, function, bounds):
-
     selection = select(population, LAMBDA)
     offspring = mate(selection, function)
     population.members = mutate(population.members, function, bounds)
@@ -28,7 +27,6 @@ def evolution(population, function, bounds):
 
 
 def select(population, how_many):
-
     tmp_generation = []
 
     for _ in range(how_many):
@@ -38,7 +36,6 @@ def select(population, how_many):
 
 
 def mate(members, function):
-
     children_genotypes = []
     # average with random weight
     for _ in members:
@@ -51,15 +48,13 @@ def mate(members, function):
             child_chromosome.append(weight * parent_1.chromosome[i] + (1 - weight) * parent_2.chromosome[i])
 
         child = optproblems.base.Individual(child_chromosome)
-        function.evaluate(child)
-        child_genotype = Genotype(child_chromosome, child.objective_values)
+        child_genotype = Genotype(child_chromosome, 0)
         children_genotypes.append(child_genotype)
 
     return children_genotypes
 
 
 def mutate(genotypes, function, bounds):
-
     for i in range(len(genotypes)):
         for j in range(DIMENSION):
             x_j = genotypes[i].chromosome[j]
@@ -80,7 +75,6 @@ def mutate(genotypes, function, bounds):
 
 
 def succession(current_generation, children, population_size):
-
     next_generation = current_generation + children
     next_generation = sorted(next_generation, key=lambda x: x.fitness)
 
@@ -88,16 +82,15 @@ def succession(current_generation, children, population_size):
 
 
 class Population:
-
     generation = 1
 
     def __init__(self, members):
         self.members = members
 
     @classmethod
-    def rand_population(cls, size, function, bound):        # single bound because most functions in the benchmark
+    def rand_population(cls, size, function, bound):  # single bound because most functions in the benchmark
 
-        members = []                                        # have bounds of additive inverses [-x,x]
+        members = []  # have bounds of additive inverses [-x,x]
 
         for j in range(size):
             x = []
