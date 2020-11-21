@@ -7,7 +7,7 @@
     Warsaw University of Technology
     Faculty of Electronics and Information Technology
 """
-from package.genotype import DIMENSION
+from package.genotype import *
 from package.visuals import plot_graph
 import math
 
@@ -59,6 +59,17 @@ def check_sd_criterion(population, epsilon):
 
 def check_k_iterations_criterion(k_best_fit, k_best_gen, k_value, population):
     if population.generation - k_best_gen >= k_value and k_best_fit < population.members[BEST_MEMBER].fitness:
+        return True
+    else:
+        return False
+
+
+def check_best_worst_criterion(population, epsilon):
+    worst_member_idx = len(population.members) - 1
+    best_fit = population.members[BEST_MEMBER].fitness
+    worst_fit = population.members[worst_member_idx].fitness
+
+    if math.fabs(best_fit - worst_fit) <= epsilon:
         return True
     else:
         return False

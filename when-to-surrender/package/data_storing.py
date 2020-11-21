@@ -16,6 +16,7 @@ GENERATION_ZERO_SHIFT = 1
 
 SD_DATA_IDX = 0
 K_ITER_DATA_IDX = 1
+BEST_WORST_DATA_IDX = 2
 
 
 def merge_data(multiple_runs):  # merge [[run1_data], [run2_data], ...] into [mean_run_data]
@@ -58,18 +59,29 @@ class FunctionOptimizationData:
     def __init__(self, data, iterations):
         self.sd_crit_data = data[SD_DATA_IDX]
         self.k_iter_crit_data = data[K_ITER_DATA_IDX]
+        self.best_worst_crit_data = data[BEST_WORST_DATA_IDX]
         self.iterations = iterations
 
     def print_sd_crit_stats(self):
-        print("SD |\t\tNo runs: {}\t|\tGenerations mean: {}\t|\tBest fit mean: {}\t|\tNumber of evals mean: {}"
+        print("SD |\t\t\t\tNo runs: {}\t|\tGenerations mean: {}\t\t|"
+              "\tBest fit mean: {}\t\t|\tNumber of evals mean: {}"
               .format(self.iterations,
                       round(self.sd_crit_data[GENERATIONS_IDX], DECIMAL_POINTS),
                       round(self.sd_crit_data[BEST_FITS_IDX], DECIMAL_POINTS),
                       round(self.sd_crit_data[EVALS_IDX], DECIMAL_POINTS)))
 
     def print_k_iter_crit_stats(self):
-        print("k-iter |\t\tNo runs: {}\t|\tGenerations mean: {}\t|\tBest fit mean: {}\t|\tNumber of evals mean: {}"
+        print("k-iter |\t\t\tNo runs: {}\t|\tGenerations mean: {}\t\t|"
+              "\tBest fit mean: {}\t\t|\tNumber of evals mean: {}"
               .format(self.iterations,
                       round(self.k_iter_crit_data[GENERATIONS_IDX], DECIMAL_POINTS),
                       round(self.k_iter_crit_data[BEST_FITS_IDX], DECIMAL_POINTS),
                       round(self.k_iter_crit_data[EVALS_IDX], DECIMAL_POINTS)))
+
+    def print_best_worst_crit_stats(self):
+        print("best-worst |\t\tNo runs: {}\t|\tGenerations mean: {}\t\t|"
+              "\tBest fit mean: {}\t\t|\tNumber of evals mean: {}"
+              .format(self.iterations,
+                      round(self.best_worst_crit_data[GENERATIONS_IDX], DECIMAL_POINTS),
+                      round(self.best_worst_crit_data[BEST_FITS_IDX], DECIMAL_POINTS),
+                      round(self.best_worst_crit_data[EVALS_IDX], DECIMAL_POINTS)))

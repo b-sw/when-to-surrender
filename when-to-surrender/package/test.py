@@ -21,7 +21,7 @@ F4_BOUND = 100
 F5_BOUND = 100
 F6_BOUND = 100
 
-ITERATIONS = 2
+ITERATIONS = 1
 
 
 def show_test_output(data):
@@ -29,6 +29,7 @@ def show_test_output(data):
     output_data = FunctionOptimizationData(data, ITERATIONS)
     output_data.print_sd_crit_stats()
     output_data.print_k_iter_crit_stats()
+    output_data.print_best_worst_crit_stats()
 
 
 def run_tests():
@@ -47,6 +48,10 @@ def run_tests():
     data[F4].append(merge_data(MultipleRunsData(run_multiple_optimizations(f4, F4_BOUND,
                                                                            run_by_k_iterations_criterion))))
     print('\tDone.')
+    print('\tRunning by best-worst criterion...')
+    data[F4].append(merge_data(MultipleRunsData(run_multiple_optimizations(f4, F4_BOUND,
+                                                                           run_by_best_worst_criterion))))
+    print('\tDone.')
     print('Done running F4')
 
     print('Running F5...')
@@ -57,6 +62,10 @@ def run_tests():
     print('\tRunning by k-iterations criterion...')
     data[F5].append(merge_data(MultipleRunsData(run_multiple_optimizations(f5, F5_BOUND,
                                                                            run_by_k_iterations_criterion))))
+    print('\tDone.')
+    print('\tRunning by best-worst criterion...')
+    data[F5].append(merge_data(MultipleRunsData(run_multiple_optimizations(f5, F5_BOUND,
+                                                                           run_by_best_worst_criterion))))
     print('\tDone.')
     print('Done running F5')
 
