@@ -1,5 +1,5 @@
 """
-    Name: characteristics.py
+    Name: properties.py
     Purpose:
 
     @author
@@ -11,10 +11,7 @@ from package.genotype import DIMENSION
 from package.visuals import plot_graph
 import math
 
-GENERATIONS_IDX = 0
-BEST_FIT_IDX = 1
-EVALS_IDX = 2
-GENERATION_ZERO = 1
+BEST_MEMBER = 0
 
 
 def calc_expected_value(population):
@@ -61,42 +58,7 @@ def check_sd_criterion(population, epsilon):
 
 
 def check_k_iterations_criterion(k_best_fit, k_best_gen, k_value, population):
-    if population.generation - k_best_gen >= k_value and k_best_fit < population.members[0].fitness:
+    if population.generation - k_best_gen >= k_value and k_best_fit < population.members[BEST_MEMBER].fitness:
         return True
     else:
         return False
-
-
-def merge_data(runs):  # merge [[], [], ...] into []
-
-    number_of_runs = len(runs)
-
-    mean_generations = 0
-    mean_best_fit = 0
-    mean_evals = 0
-
-    for i in range(number_of_runs):
-        number_of_generations = len(runs[i].data[GENERATIONS_IDX])
-        best_fit_in_run = runs[i].data[BEST_FIT_IDX][number_of_generations - 1]
-
-        mean_generations += number_of_generations + GENERATION_ZERO
-        mean_best_fit += best_fit_in_run
-        mean_evals += runs[i].data[EVALS_IDX]
-
-    mean_generations /= number_of_runs
-    mean_best_fit /= number_of_runs
-    mean_evals /= number_of_runs
-
-    return [mean_generations, mean_best_fit, mean_evals]
-
-
-class Data:
-
-    def __init__(self, data):
-        self.data = data
-        self.x_label = 'Generation'
-        self.y_label = 'min{Q(X)}'
-        self.title = 'F4'
-
-    def plot_graph(self):
-        plot_graph(self.data[GENERATIONS_IDX], self.data[BEST_FIT_IDX], self.title, self.x_label, self.y_label)
