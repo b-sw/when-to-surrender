@@ -9,7 +9,6 @@
 """
 import optproblems
 import optproblems.cec2005
-import os
 
 from package.optimize import *
 from package.data_storing import *
