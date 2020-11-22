@@ -11,25 +11,25 @@ from package.test import *
 import getopt
 import sys
 
-ARGC = 2
+ARGC = 4
 
 
 def main():
     argv = sys.argv[1:]
     """
-        argv[0] = function to optimize
-        argv[1] = k value for k-iterations criterion / epsilon for standard deviation criterion
+        0 - function to optimize
+        1 - k value for k-iterations criterion 
+        2 - epsilon for standard deviation criterion
+        3 - epsilon for best-worst criterion
     """
     if len(argv) == ARGC:
-        print(argv[0])
-        print(argv[1])
         fun = argv[0]
-        optimize.EPSILON_DEVIATION = argv[1]
-        optimize.K_ITERATIONS = argv[1]
-        optimize.EPSILON_BEST_WORST = argv[1]
-        print(EPSILON_DEVIATION)
-        print(K_ITERATIONS)
-        print(EPSILON_BEST_WORST)
+        K_ITERATIONS = argv[1]
+        EPSILON_DEVIATION = argv[2]
+        EPSILON_BEST_WORST = argv[3]
+        test_output = run_tests(fun)
+        print('{} stats:'.format(fun))
+        show_test_output(test_output)
     else:
         test_output = run_tests('F4')
         print('F4 stats:')
