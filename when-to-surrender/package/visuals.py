@@ -24,4 +24,4 @@ def plot_graph(x_values, y_values, title, x_label, y_label):
 
     plt.savefig("graphs/" + title + ".pdf")
 
-    plt.show()
+    # plt.show()

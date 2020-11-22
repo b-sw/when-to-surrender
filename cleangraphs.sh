@@ -1,3 +1,3 @@
 #!/bin/sh
 
-rm graphs/*
+rm -rf graphs
