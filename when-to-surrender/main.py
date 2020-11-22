@@ -17,7 +17,7 @@ ARGC = 4
 def main():
     argv = sys.argv[1:]
     """
-        0 - function to optimize
+       0 - function to optimize
         1 - k value for k-iterations criterion 
         2 - epsilon for standard deviation criterion
         3 - epsilon for best-worst criterion

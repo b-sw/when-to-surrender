@@ -44,7 +44,7 @@ def run_tests(function):
         f = optproblems.cec2005.F6(DIMENSION)  # Shifted Rosenbrock’s Function
         bound = F6_BOUND
 
-    print('Running F4...')
+    print('Running {}...'.format(function))
     print('\tRunning by standard deviation criterion...')
     data.append(merge_data(MultipleRunsData(run_multiple_optimizations(f, bound,
                                                                        run_by_sd_criterion))))
