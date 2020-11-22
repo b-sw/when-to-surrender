@@ -21,14 +21,15 @@ F4_BOUND = 100
 F5_BOUND = 100
 F6_BOUND = 100
 
-ITERATIONS = 25
+ITERATIONS = 5
 
 
 def show_test_output(data):
     output_data = FunctionOptimizationData(data, ITERATIONS)
-    output_data.print_sd_crit_stats()
     output_data.print_k_iter_crit_stats()
+    output_data.print_sd_crit_stats()
     output_data.print_best_worst_crit_stats()
+    output_data.print_variance_crit_stats()
 
 
 def run_tests(function):
@@ -45,17 +46,21 @@ def run_tests(function):
         bound = F6_BOUND
 
     print('Running {}...'.format(function))
-    print('\tRunning by standard deviation criterion...')
-    data.append(merge_data(MultipleRunsData(run_multiple_optimizations(f, bound,
-                                                                       run_by_sd_criterion))))
-    print('\tDone.')
     print('\tRunning by k-iterations criterion...')
     data.append(merge_data(MultipleRunsData(run_multiple_optimizations(f, bound,
                                                                        run_by_k_iterations_criterion))))
     print('\tDone.')
+    print('\tRunning by standard deviation criterion...')
+    data.append(merge_data(MultipleRunsData(run_multiple_optimizations(f, bound,
+                                                                       run_by_sd_criterion))))
+    print('\tDone.')
     print('\tRunning by best-worst criterion...')
     data.append(merge_data(MultipleRunsData(run_multiple_optimizations(f, bound,
                                                                        run_by_best_worst_criterion))))
+    print('\tRunning by variance criterion...')
+    data.append(merge_data(MultipleRunsData(run_multiple_optimizations(f, bound,
+                                                                       run_by_variance_criterion))))
+    print('\tDone.')
 
     print('### Done testing. ###')
 

@@ -47,6 +47,39 @@ def calc_standard_deviation(population):
     return standard_deviations
 
 
+def calc_fit_expected_value(population):
+    expected_value = 0
+    population_size = len(population.members)
+
+    for i in range(population_size):
+        expected_value += population.members[i].fitness
+
+    expected_value /= population_size
+
+    return expected_value
+
+
+def calc_variance(population):
+    fitness_variance = 0
+    expected_fit = calc_fit_expected_value(population)
+    population_size = len(population.members)
+
+    tmp_sum = 0
+    for i in range(population_size):
+        tmp_sum += math.pow(population.members[i].fitness - expected_fit, 2)
+
+    fitness_variance = 1 / population_size * tmp_sum
+
+    return fitness_variance
+
+
+def check_k_iterations_criterion(k_best_fit, k_best_gen, k_value, population):
+    if population.generation - k_best_gen >= k_value and k_best_fit <= population.members[BEST_MEMBER].fitness:
+        return True
+    else:
+        return False
+
+
 def check_sd_criterion(population, epsilon):
     standard_deviations = calc_standard_deviation(population)
 
@@ -57,19 +90,20 @@ def check_sd_criterion(population, epsilon):
     return True
 
 
-def check_k_iterations_criterion(k_best_fit, k_best_gen, k_value, population):
-    if population.generation - k_best_gen >= k_value and k_best_fit < population.members[BEST_MEMBER].fitness:
-        return True
-    else:
-        return False
-
-
 def check_best_worst_criterion(population, epsilon):
     worst_member_idx = len(population.members) - 1
     best_fit = population.members[BEST_MEMBER].fitness
     worst_fit = population.members[worst_member_idx].fitness
 
     if math.fabs(best_fit - worst_fit) <= epsilon:
+        return True
+    else:
+        return False
+
+
+def check_variance_criterion(population, epsilon):
+    fitness_variance = calc_variance(population)
+    if fitness_variance <= epsilon:
         return True
     else:
         return False

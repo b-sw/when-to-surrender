@@ -11,7 +11,7 @@ from package.test import *
 import getopt
 import sys
 
-ARGC = 4
+ARGC = 5
 
 
 def main():
@@ -21,12 +21,14 @@ def main():
         1 - k value for k-iterations criterion 
         2 - epsilon for standard deviation criterion
         3 - epsilon for best-worst criterion
+        4 - epsilon for variance criterion
     """
     if len(argv) == ARGC:
         fun = argv[0]
         K_ITERATIONS = argv[1]
         EPSILON_DEVIATION = argv[2]
         EPSILON_BEST_WORST = argv[3]
+        EPSILON_VARIANCE = argv[4]
         test_output = run_tests(fun)
         print('{} stats:'.format(fun))
         show_test_output(test_output)
@@ -34,9 +36,6 @@ def main():
         test_output = run_tests('F4')
         print('F4 stats:')
         show_test_output(test_output)
-
-    # graph_data = optimize(optproblems.cec2005.F4(DIMENSION), F4_BOUND, tmp_criterion)
-    # plot_graph(graph_data[0], graph_data[1], 'F4', 'Generation', 'minVal{F(X)}')
 
 
 if __name__ == '__main__':

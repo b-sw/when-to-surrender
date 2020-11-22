@@ -20,7 +20,7 @@ LAMBDA = 7 * MU
 def evolution(population, function, bounds):
     selection = select(population, LAMBDA)
     offspring = mate(selection, function)
-    population.members = mutate(population.members, function, bounds)
+    # population.members = mutate(population.members, function, bounds)
     offspring = mutate(offspring, function, bounds)
     population.members = succession(population.members, offspring, MU)
     population.generation += 1
