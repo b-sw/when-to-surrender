@@ -1,3 +1,4 @@
 .idea/
 notatki.txt
 __pycache__/
+*.swp
