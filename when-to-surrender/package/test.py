@@ -21,7 +21,7 @@ F4_BOUND = 100
 F5_BOUND = 100
 F6_BOUND = 100
 
-ITERATIONS = 1
+ITERATIONS = 10
 
 
 def show_test_output(data):

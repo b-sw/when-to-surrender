@@ -26,11 +26,12 @@ def main():
 
     if len(argv) == ARGC:
         fun = argv[0]
-        k_iterations = argv[1]
-        epsilon_deviation = argv[2]
-        epsilon_best_worst = argv[3]
-        epsilon_variance = argv[4]
-        set_parameters(k_iterations, epsilon_deviation, epsilon_best_worst, epsilon_variance)
+        k_iterations = int(argv[1])
+        epsilon_deviation = int(argv[2])
+        epsilon_best_worst = int(argv[3])
+        epsilon_variance = int(argv[4])
+        set_parameters(k_iterations, epsilon_deviation,
+                       epsilon_best_worst, epsilon_variance)
         test_output = run_tests(fun)
         print('{} Stats for K_VALUE: {} \t SD_EPSILON: {} \t BW_EPSILON: {} \t V_EPSILON: {}:'
               .format(fun, k_iterations, epsilon_deviation, epsilon_best_worst, epsilon_variance))
@@ -40,7 +41,8 @@ def main():
         epsilon_deviation = 10
         epsilon_best_worst = 10000
         epsilon_variance = 1000000
-        set_parameters(k_iterations, epsilon_deviation, epsilon_best_worst, epsilon_variance)
+        set_parameters(k_iterations, epsilon_deviation,
+                       epsilon_best_worst, epsilon_variance)
         test_output = run_tests('F4')
         print('F4 stats for K_VALUE: {} \t SD_EPSILON: {} \t BW_EPSILON: {} \t V_EPSILON: {}:'
               .format(k_iterations, epsilon_deviation, epsilon_best_worst, epsilon_variance))
