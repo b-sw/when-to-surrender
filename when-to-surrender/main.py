@@ -24,14 +24,16 @@ def main():
         print(argv[0])
         print(argv[1])
         fun = argv[0]
-        test.EPSILON_DEVIATION = argv[1]
-        test.K_ITERATIONS = argv[1]
+        optimize.EPSILON_DEVIATION = argv[1]
+        optimize.K_ITERATIONS = argv[1]
+        optimize.EPSILON_BEST_WORST = argv[1]
+        print(EPSILON_DEVIATION)
+        print(K_ITERATIONS)
+        print(EPSILON_BEST_WORST)
     else:
-        test_output = run_tests()
+        test_output = run_tests('F4')
         print('F4 stats:')
-        show_test_output(test_output[F4])
-        print('F5 stats:')
-        show_test_output(test_output[F5])
+        show_test_output(test_output)
 
     # graph_data = optimize(optproblems.cec2005.F4(DIMENSION), F4_BOUND, tmp_criterion)
     # plot_graph(graph_data[0], graph_data[1], 'F4', 'Generation', 'minVal{F(X)}')
