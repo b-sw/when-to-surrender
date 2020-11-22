@@ -11,22 +11,26 @@ from package.population import *
 from package.properties import *
 
 BUDGET = 10000 * DIMENSION
-K_ITERATIONS = 1
-EPSILON_DEVIATION = 1
-EPSILON_BEST_WORST = 1
-EPSILON_VARIANCE = 1
+K_ITERATIONS = 5
+EPSILON_DEVIATION = 10
+EPSILON_BEST_WORST = 10000
+EPSILON_VARIANCE = 1000000
 
 
-def set_parameters(k_iterations, epsilon_deviation, epsilon_best_worst, epsilon_variance):
+def set_parameters(which, value):
     global K_ITERATIONS
     global EPSILON_DEVIATION
     global EPSILON_BEST_WORST
     global EPSILON_VARIANCE
 
-    K_ITERATIONS = k_iterations
-    EPSILON_DEVIATION = epsilon_deviation
-    EPSILON_BEST_WORST = epsilon_best_worst
-    EPSILON_VARIANCE = epsilon_variance
+    if which == 'k-iter':
+        K_ITERATIONS = value
+    elif which == 'sd':
+        EPSILON_DEVIATION = value
+    elif which == 'best-worst':
+        EPSILON_BEST_WORST = value
+    elif which == 'variance':
+        EPSILON_VARIANCE = value
 
 
 def optimize(function, bounds, criterion):
@@ -38,8 +42,6 @@ def optimize(function, bounds, criterion):
 
     [generations, best_evals, number_of_evals] = criterion(function, bounds, population, generations,
                                                            best_evals, number_of_evals)
-
-    # print('Best eval: {}\t|\tNumber of generations: {}'.format(population.members[0].fitness, population.generation))
 
     return [generations, best_evals, number_of_evals]  # later just return criterion(...)
 

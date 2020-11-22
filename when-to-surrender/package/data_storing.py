@@ -51,47 +51,17 @@ class MultipleRunsData:
         self.y_label = 'min{Q(X)}'
         self.title = 'F4'
 
-    # def plot_graph(self):
-    #    plot_graph(self.data[GENERATIONS_IDX], self.data[BEST_FIT_IDX], self.title, self.x_label, self.y_label)
-
 
 class FunctionOptimizationData:
 
     def __init__(self, data, iterations):
-        self.sd_crit_data = data[SD_DATA_IDX]
-        self.k_iter_crit_data = data[K_ITER_DATA_IDX]
-        self.best_worst_crit_data = data[BEST_WORST_DATA_IDX]
-        self.variance_crit_data = data[VARIANCE_DATA_IDX]
+        self.crit_data = data
         self.iterations = iterations
 
-    def print_k_iter_crit_stats(self):
+    def print_stats(self):
         print("k-iter |\t\tNo runs: {}\t|\tGenerations mean: {}\t\t|"
               "\tBest fit mean: {}\t\t|\tNumber of evals mean: {}"
               .format(self.iterations,
-                      round(self.k_iter_crit_data[GENERATIONS_IDX], DECIMAL_POINTS),
-                      round(self.k_iter_crit_data[BEST_FITS_IDX], DECIMAL_POINTS),
-                      round(self.k_iter_crit_data[EVALS_IDX], DECIMAL_POINTS)))
-
-    def print_sd_crit_stats(self):
-        print("SD |\t\t\tNo runs: {}\t|\tGenerations mean: {}\t\t|"
-              "\tBest fit mean: {}\t\t|\tNumber of evals mean: {}"
-              .format(self.iterations,
-                      round(self.sd_crit_data[GENERATIONS_IDX], DECIMAL_POINTS),
-                      round(self.sd_crit_data[BEST_FITS_IDX], DECIMAL_POINTS),
-                      round(self.sd_crit_data[EVALS_IDX], DECIMAL_POINTS)))
-
-    def print_best_worst_crit_stats(self):
-        print("best-worst |\t\tNo runs: {}\t|\tGenerations mean: {}\t\t|"
-              "\tBest fit mean: {}\t\t|\tNumber of evals mean: {}"
-              .format(self.iterations,
-                      round(self.best_worst_crit_data[GENERATIONS_IDX], DECIMAL_POINTS),
-                      round(self.best_worst_crit_data[BEST_FITS_IDX], DECIMAL_POINTS),
-                      round(self.best_worst_crit_data[EVALS_IDX], DECIMAL_POINTS)))
-
-    def print_variance_crit_stats(self):
-        print("variance |\t\tNo runs: {}\t|\tGenerations mean: {}\t\t|"
-              "\tBest fit mean: {}\t\t|\tNumber of evals mean: {}"
-              .format(self.iterations,
-                      round(self.variance_crit_data[GENERATIONS_IDX], DECIMAL_POINTS),
-                      round(self.variance_crit_data[BEST_FITS_IDX], DECIMAL_POINTS),
-                      round(self.variance_crit_data[EVALS_IDX], DECIMAL_POINTS)))
+                      round(self.crit_data[GENERATIONS_IDX], DECIMAL_POINTS),
+                      round(self.crit_data[BEST_FITS_IDX], DECIMAL_POINTS),
+                      round(self.crit_data[EVALS_IDX], DECIMAL_POINTS)))
