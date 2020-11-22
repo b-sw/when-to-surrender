@@ -12,11 +12,16 @@ import matplotlib.pyplot as plt
 
 def plot_graph(x_values, y_values, title, x_label, y_label):
 
-    plt.plot(x_values, y_values, color='green', linestyle=':')
+    plt.bar(x_values, y_values, color=['cornflowerblue', 'orange', 'purple', 'limegreen'], linestyle=':')
+
+    plt.xticks(x_values, x_values)
+    plt.yticks(y_values, y_values)
 
     plt.xlabel(x_label)
     plt.ylabel(y_label)
 
     plt.title(title)
+
+    plt.savefig("graphs/" + title + ".pdf")
 
     plt.show()
