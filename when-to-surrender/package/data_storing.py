@@ -7,6 +7,8 @@
     Warsaw University of Technology
     Faculty of Electronics and Information Technology
 """
+from package.visuals import *
+
 DECIMAL_POINTS = 2
 
 GENERATIONS_IDX = 0
@@ -54,14 +56,29 @@ class MultipleRunsData:
 
 class FunctionOptimizationData:
 
-    def __init__(self, data, iterations):
+    def __init__(self, data, iterations, params, criterion_name):
         self.crit_data = data
         self.iterations = iterations
+        self.params = params
+        self.number_of_params = len(params)
+        self.criterion_name = criterion_name
 
     def print_stats(self):
-        print("k-iter |\t\tNo runs: {}\t|\tGenerations mean: {}\t\t|"
-              "\tBest fit mean: {}\t\t|\tNumber of evals mean: {}"
-              .format(self.iterations,
-                      round(self.crit_data[GENERATIONS_IDX], DECIMAL_POINTS),
-                      round(self.crit_data[BEST_FITS_IDX], DECIMAL_POINTS),
-                      round(self.crit_data[EVALS_IDX], DECIMAL_POINTS)))
+        for i in range(self.number_of_params):
+            print("{} |\t\tNo runs: {}\t|\tGenerations mean: {}\t\t|"
+                  "\tBest fit mean: {}\t\t|\tNumber of evals mean: {}"
+                  .format(self.criterion_name, self.iterations,
+                          round(self.crit_data[i][GENERATIONS_IDX], DECIMAL_POINTS),
+                          round(self.crit_data[i][BEST_FITS_IDX], DECIMAL_POINTS),
+                          round(self.crit_data[i][EVALS_IDX], DECIMAL_POINTS)))
+
+        self.plot_best_fits_graph()
+
+    def plot_best_fits_graph(self):
+        fits_values = []
+        for i in range(self.number_of_params):
+            fits_values.append(round(self.crit_data[i][BEST_FITS_IDX]))
+        plot_graph(self.params, fits_values, self.criterion_name, 'Params', 'Best fit mean')
+
+    def plot_evals_graph(self):
+        pass

@@ -11,7 +11,7 @@ from package.test import *
 import getopt
 import sys
 
-ARGC = 5
+ARGC = 6
 
 
 def main():
@@ -19,22 +19,23 @@ def main():
     """
         0 - function to optimize
         1 - criterion
-        2 - criterion parameter
+        2-5 - criterion parameters
     """
 
     if len(argv) == ARGC:
         fun = argv[0]
         criterion = argv[1]
-        parameter = float(argv[2])
-        test_output = run_tests(fun, criterion, parameter)
+        for i in range(ARGC - 2):
+            parameters.append(float(argv[i]))
+        test_output = run_tests(fun, criterion, parameters)
         print('{} stats for {} parameter = {}'
-              .format(fun, criterion, parameter))
-        show_test_output(test_output)
+              .format(fun, criterion, parameters))
+        show_test_output(test_output, params, criterion)
     else:
-        test_output = run_tests('F4', 'variance', 1)
-        print('F4 stats for {} parameter: {}'
-              .format('k-iter', K_ITERATIONS))
-        show_test_output(test_output)
+        test_output = run_tests('F4', 'k-iter', [1, 2, 3, 4])
+        print('F4 stats for {} parameters: {}'
+              .format('k-iter', [1, 2, 3, 4]))
+        show_test_output(test_output, 'k-iter', [1, 2, 3, 4])
 
 
 if __name__ == '__main__':
