@@ -11,10 +11,22 @@ from package.population import *
 from package.properties import *
 
 BUDGET = 10000 * DIMENSION
-K_ITERATIONS = 20
-EPSILON_DEVIATION = 10
-EPSILON_BEST_WORST = 10000
-EPSILON_VARIANCE = 0.5
+K_ITERATIONS = 1
+EPSILON_DEVIATION = 1
+EPSILON_BEST_WORST = 1
+EPSILON_VARIANCE = 1
+
+
+def set_parameters(k_iterations, epsilon_deviation, epsilon_best_worst, epsilon_variance):
+    global K_ITERATIONS
+    global EPSILON_DEVIATION
+    global EPSILON_BEST_WORST
+    global EPSILON_VARIANCE
+
+    K_ITERATIONS = k_iterations
+    EPSILON_DEVIATION = epsilon_deviation
+    EPSILON_BEST_WORST = epsilon_best_worst
+    EPSILON_VARIANCE = epsilon_variance
 
 
 def optimize(function, bounds, criterion):
@@ -84,7 +96,6 @@ def run_by_best_worst_criterion(function, bounds, population, generations, best_
 def run_by_variance_criterion(function, bounds, population, generations, best_evals, number_of_evals):
     while number_of_evals + LAMBDA < BUDGET \
             and not (check_variance_criterion(population, EPSILON_VARIANCE)):
-
         generations.append(population.generation)
         best_evals.append(population.members[BEST_MEMBER].fitness)
         evolution(population, function, bounds)

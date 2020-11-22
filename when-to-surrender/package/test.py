@@ -21,7 +21,7 @@ F4_BOUND = 100
 F5_BOUND = 100
 F6_BOUND = 100
 
-ITERATIONS = 5
+ITERATIONS = 1
 
 
 def show_test_output(data):
@@ -46,21 +46,21 @@ def run_tests(function):
         bound = F6_BOUND
 
     print('Running {}...'.format(function))
-    print('\tRunning by k-iterations criterion...')
+    # print('\tRunning by k-iterations criterion...')
     data.append(merge_data(MultipleRunsData(run_multiple_optimizations(f, bound,
                                                                        run_by_k_iterations_criterion))))
-    print('\tDone.')
-    print('\tRunning by standard deviation criterion...')
+    # print('\tDone.')
+    # print('\tRunning by standard deviation criterion...')
     data.append(merge_data(MultipleRunsData(run_multiple_optimizations(f, bound,
                                                                        run_by_sd_criterion))))
-    print('\tDone.')
-    print('\tRunning by best-worst criterion...')
+    # print('\tDone.')
+    # print('\tRunning by best-worst criterion...')
     data.append(merge_data(MultipleRunsData(run_multiple_optimizations(f, bound,
                                                                        run_by_best_worst_criterion))))
-    print('\tRunning by variance criterion...')
+    # print('\tRunning by variance criterion...')
     data.append(merge_data(MultipleRunsData(run_multiple_optimizations(f, bound,
                                                                        run_by_variance_criterion))))
-    print('\tDone.')
+    # print('\tDone.')
 
     print('### Done testing. ###')
 

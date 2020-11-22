@@ -65,7 +65,7 @@ class FunctionOptimizationData:
         self.iterations = iterations
 
     def print_k_iter_crit_stats(self):
-        print("k-iter |\t\t\tNo runs: {}\t|\tGenerations mean: {}\t\t|"
+        print("k-iter |\t\tNo runs: {}\t|\tGenerations mean: {}\t\t|"
               "\tBest fit mean: {}\t\t|\tNumber of evals mean: {}"
               .format(self.iterations,
                       round(self.k_iter_crit_data[GENERATIONS_IDX], DECIMAL_POINTS),
@@ -73,7 +73,7 @@ class FunctionOptimizationData:
                       round(self.k_iter_crit_data[EVALS_IDX], DECIMAL_POINTS)))
 
     def print_sd_crit_stats(self):
-        print("SD |\t\t\t\tNo runs: {}\t|\tGenerations mean: {}\t\t|"
+        print("SD |\t\t\tNo runs: {}\t|\tGenerations mean: {}\t\t|"
               "\tBest fit mean: {}\t\t|\tNumber of evals mean: {}"
               .format(self.iterations,
                       round(self.sd_crit_data[GENERATIONS_IDX], DECIMAL_POINTS),

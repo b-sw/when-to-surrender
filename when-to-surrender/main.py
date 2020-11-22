@@ -23,25 +23,27 @@ def main():
         3 - epsilon for best-worst criterion
         4 - epsilon for variance criterion
     """
-    global K_ITERATIONS
-    global EPSILON_DEVIATION
-    global EPSILON_BEST_WORST
-    global EPSILON_VARIANCE
 
     if len(argv) == ARGC:
         fun = argv[0]
-        K_ITERATIONS = argv[1]
-        EPSILON_DEVIATION = argv[2]
-        EPSILON_BEST_WORST = argv[3]
-        EPSILON_VARIANCE = argv[4]
+        k_iterations = argv[1]
+        epsilon_deviation = argv[2]
+        epsilon_best_worst = argv[3]
+        epsilon_variance = argv[4]
+        set_parameters(k_iterations, epsilon_deviation, epsilon_best_worst, epsilon_variance)
         test_output = run_tests(fun)
         print('{} Stats for K_VALUE: {} \t SD_EPSILON: {} \t BW_EPSILON: {} \t V_EPSILON: {}:'
-              .format(fun, K_ITERATIONS, EPSILON_DEVIATION, EPSILON_BEST_WORST, EPSILON_VARIANCE))
+              .format(fun, k_iterations, epsilon_deviation, epsilon_best_worst, epsilon_variance))
         show_test_output(test_output)
     else:
+        k_iterations = 5
+        epsilon_deviation = 10
+        epsilon_best_worst = 10000
+        epsilon_variance = 1000000
+        set_parameters(k_iterations, epsilon_deviation, epsilon_best_worst, epsilon_variance)
         test_output = run_tests('F4')
         print('F4 stats for K_VALUE: {} \t SD_EPSILON: {} \t BW_EPSILON: {} \t V_EPSILON: {}:'
-              .format(K_ITERATIONS, EPSILON_DEVIATION, EPSILON_BEST_WORST, EPSILON_VARIANCE))
+              .format(k_iterations, epsilon_deviation, epsilon_best_worst, epsilon_variance))
         show_test_output(test_output)
 
 
