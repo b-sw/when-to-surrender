@@ -11,10 +11,10 @@ from package.population import *
 from package.properties import *
 
 BUDGET = 10000 * DIMENSION
-K_ITERATIONS = 5
-EPSILON_DEVIATION = 5
+K_ITERATIONS = 20
+EPSILON_DEVIATION = 10
 EPSILON_BEST_WORST = 10000
-EPSILON_VARIANCE = 1
+EPSILON_VARIANCE = 0.5
 
 
 def optimize(function, bounds, criterion):
