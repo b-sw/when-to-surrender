@@ -20,8 +20,8 @@ F4_OPT_BIAS = -450
 F5_OPT_BIAS = -310
 F6_OPT_BIAS = 390
 
-ITERATIONS = 2
-PARAMS = 25
+ITERATIONS = 25
+PARAMS = 4
 
 
 def show_test_output(data, criterion_name, params):
