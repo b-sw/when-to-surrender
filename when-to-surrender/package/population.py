@@ -17,11 +17,11 @@ MU = 20
 LAMBDA = 7 * MU
 
 
-def evolution(population, function, bounds):
+def evolution(population, function, bounds, bias):
     selection = select(population, LAMBDA)
     offspring = mate(selection, function)
     # population.members = mutate(population.members, function, bounds)
-    offspring = mutate(offspring, function, bounds)
+    offspring = mutate(offspring, function, bounds, bias)
     population.members = succession(population.members, offspring, MU)
     population.generation += 1
 
@@ -54,7 +54,7 @@ def mate(members, function):
     return children_genotypes
 
 
-def mutate(genotypes, function, bounds):
+def mutate(genotypes, function, bounds, bias):
     for i in range(len(genotypes)):
         for j in range(DIMENSION):
             x_j = genotypes[i].chromosome[j]
@@ -69,7 +69,7 @@ def mutate(genotypes, function, bounds):
         individual = optproblems.base.Individual(genotypes[i].chromosome)
         function.evaluate(individual)
 
-        genotypes[i].fitness = individual.objective_values
+        genotypes[i].fitness = individual.objective_values - bias
 
     return genotypes
 

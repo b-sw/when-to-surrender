@@ -13,15 +13,15 @@ import optproblems.cec2005
 from package.optimize import *
 from package.data_storing import *
 
-F4 = 0
-F5 = 1
-F6 = 2
 F4_BOUND = 100
 F5_BOUND = 100
 F6_BOUND = 100
+F4_OPT_BIAS = -450
+F5_OPT_BIAS = -310
+F6_OPT_BIAS = 390
 
-ITERATIONS = 25
-PARAMS = 4
+ITERATIONS = 2
+PARAMS = 25
 
 
 def show_test_output(data, criterion_name, params):
@@ -36,14 +36,17 @@ def run_tests(function, criterion_name, parameters):
     if function == 'F4':
         f = optproblems.cec2005.F4(DIMENSION)  # Shifted Schwefel’s Problem 1.2 with Noise in Fitness
         bound = F4_BOUND
+        bias = F4_OPT_BIAS
     elif function == 'F5':
         f = optproblems.cec2005.F5(DIMENSION)  # Schwefel’s Problem 2.6 with Global Optimum on Bounds
         bound = F5_BOUND
+        bias = F5_OPT_BIAS
     else:  # if function == 'F6':
         f = optproblems.cec2005.F6(DIMENSION)  # Shifted Rosenbrock’s Function
         bound = F6_BOUND
+        bias = F6_OPT_BIAS
 
-    print('Running {} by {}'.format(function, criterion_name))
+    # print('Running {} by {} - No runs: {}...'.format(function, criterion_name, ITERATIONS))
 
     if criterion_name == 'k-iter':
         criterion = run_by_k_iterations_criterion
@@ -55,8 +58,8 @@ def run_tests(function, criterion_name, parameters):
         criterion = run_by_variance_criterion
 
     for i in range(PARAMS):
-        set_parameters(criterion_name, parameters[i])
-        data.append(merge_data(MultipleRunsData(run_multiple_optimizations(f, bound, criterion))))
+        set_parameters(criterion_name, parameters[i], bias)
+        data.append(merge_data(run_multiple_optimizations(f, bound, criterion)))
 
     return data
 

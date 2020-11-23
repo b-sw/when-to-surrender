@@ -29,14 +29,10 @@ def main():
         for i in range(2, ARGC):
             parameters.append(float(argv[i]))
         test_output = run_tests(fun, criterion, parameters)
-        print('{} stats for {} parameter = {}'
-              .format(fun, criterion, parameters))
         show_test_output(test_output, criterion, parameters)
     else:
-        test_output = run_tests('F4', 'k-iter', [1, 2, 3, 4])
-        print('F4 stats for {} parameters: {}'
-              .format('k-iter', [1, 2, 3, 4]))
-        show_test_output(test_output, 'k-iter', [1, 2, 3, 4])
+        test_output = run_tests('F4', 'k-iter', [15, 30, 50, 100])
+        show_test_output(test_output, 'k-iter', [15, 30, 50, 100])
 
 
 if __name__ == '__main__':

@@ -14,7 +14,7 @@ import math
 BEST_MEMBER = 0
 
 
-def calc_expected_value(population):
+def calc_population_ev(population):
     expected_values = []
     population_size = len(population.members)
 
@@ -31,9 +31,9 @@ def calc_expected_value(population):
     return expected_values
 
 
-def calc_standard_deviation(population):
+def calc_population_sd(population):
     standard_deviations = []
-    expected_values = calc_expected_value(population)
+    expected_values = calc_population_ev(population)
     population_size = len(population.members)
 
     for i in range(DIMENSION):
@@ -47,7 +47,7 @@ def calc_standard_deviation(population):
     return standard_deviations
 
 
-def calc_fit_expected_value(population):
+def calc_fit_ev(population):
     expected_value = 0
     population_size = len(population.members)
 
@@ -59,9 +59,20 @@ def calc_fit_expected_value(population):
     return expected_value
 
 
+def calc_list_sd(values, expected):
+    length = len(values)
+    tmp_sum = 0
+    for i in range(length):
+        tmp_sum += math.pow(values[i] - expected, 2)
+
+    standard_deviation = math.sqrt(tmp_sum / length)
+
+    return standard_deviation
+
+
 def calc_variance(population):
     fitness_variance = 0
-    expected_fit = calc_fit_expected_value(population)
+    expected_fit = calc_fit_ev(population)
     population_size = len(population.members)
 
     tmp_sum = 0
@@ -81,7 +92,7 @@ def check_k_iterations_criterion(k_best_fit, k_best_gen, k_value, population):
 
 
 def check_sd_criterion(population, epsilon):
-    standard_deviations = calc_standard_deviation(population)
+    standard_deviations = calc_population_sd(population)
 
     for i in range(DIMENSION):
         if standard_deviations[i] > epsilon:
