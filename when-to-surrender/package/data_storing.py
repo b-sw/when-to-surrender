@@ -81,6 +81,8 @@ class FunctionOptimizationData:
                           round(self.crit_data[i][3], DECIMAL_POINTS)))
 
         # self.plot_best_fits_graph()
+        # tmp_data = numpy.random.normal(100, 10, 200)
+        # plot_boxplot(tmp_data, [1])
 
     def plot_best_fits_graph(self):
         fits_values = []

@@ -20,18 +20,24 @@ F4_OPT_BIAS = -450
 F5_OPT_BIAS = -310
 F6_OPT_BIAS = 390
 
-ITERATIONS = 25
+ITERATIONS = 5
 PARAMS = 4
+
+DATA_IDX = 0
+BOXPLOT_DATA_IDX = 1
+FUNCTION_IDX = 2
 
 
 def show_test_output(data, criterion_name, params):
-    output_data = FunctionOptimizationData(data, ITERATIONS, params, criterion_name)
+    output_data = FunctionOptimizationData(data[DATA_IDX], ITERATIONS, params, criterion_name)
+    plot_boxplot(data[BOXPLOT_DATA_IDX], params)
     output_data.print_stats()
 
 
 def run_tests(function, criterion_name, parameters):
 
     data = []
+    boxplot_data = []
 
     if function == 'F4':
         f = optproblems.cec2005.F4(DIMENSION)  # Shifted Schwefel’s Problem 1.2 with Noise in Fitness
@@ -58,16 +64,20 @@ def run_tests(function, criterion_name, parameters):
         criterion = run_by_variance_criterion
 
     for i in range(PARAMS):
+        print('Generate boxplot no {}...'.format(i))
         set_parameters(criterion_name, parameters[i], bias)
-        data.append(merge_data(run_multiple_optimizations(f, bound, criterion)))
+        runs = run_multiple_optimizations(f, bound, criterion)
 
-    return data
+        data.append(merge_data(runs))
+        boxplot_data.append(boxplot_from_multiple_runs(runs))
+
+    return [data, boxplot_data]
 
 
 def run_multiple_optimizations(cec_function, bounds, criterion):
     runs = []
 
-    for _ in range(ITERATIONS):
+    for i in range(ITERATIONS):
         runs.append(optimize(cec_function, bounds, criterion))
 
     return runs
