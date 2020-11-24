@@ -7,6 +7,7 @@
     Warsaw University of Technology
     Faculty of Electronics and Information Technology
 """
+import matplotlib
 import matplotlib.pyplot as plt
 
 BEST_EVALS_IDX = 0
@@ -26,24 +27,23 @@ def plot_boxplot(data, params):
     fig, ax = plt.subplots()
 
     ax.set_title('Best fits in 25 runs')
+    ax.set_xlabel('Params')
+    ax.set_ylabel('Best fit')
+
     ax.boxplot(data, labels=params)
 
     plt.show()
 
 
-def plot_graph(x_values, y_values, title, x_label, y_label):
-    plt.bar(x_values, y_values, color=['cornflowerblue', 'orange', 'purple', 'limegreen'], linestyle=':')
+def plot_graph(x_values, y_values):
 
-    plt.xticks(x_values, x_values)
-    plt.yticks(y_values, y_values)
+    plt.scatter(x_values, y_values, c='r', marker='.', s=1)
+    plt.yscale("log")
+    # plt.xticks(x_values, x_values)
+    # plt.yticks(y_values, y_values)
 
-    plt.xlabel(x_label)
-    plt.ylabel(y_label)
+    plt.title('Single run best fits')
+    plt.xlabel('Number of evals')
+    plt.ylabel('Best fit')
 
-    plt.title(title)
-    plt.xlabel('Parameter')
-    plt.ylabel('Best evals')
-
-    plt.savefig("graphs/" + title + ".pdf")
-
-    # plt.show()
+    plt.show()

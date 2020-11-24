@@ -31,8 +31,8 @@ def main():
         test_output = run_tests(fun, criterion, parameters)
         show_test_output(test_output, criterion, parameters)
     else:
-        test_output = run_tests('F4', 'k-iter', [15, 30, 50, 100])
-        show_test_output(test_output, 'k-iter', [15, 30, 50, 100])
+        test_output = run_tests('F5', 'sd', [0.05, 0.03, 0.015, 0.01])
+        show_test_output(test_output, 'sd', [0.05, 0.03, 0.015, 0.01])
 
 
 if __name__ == '__main__':

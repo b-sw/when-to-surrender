@@ -20,7 +20,7 @@ F4_OPT_BIAS = -450
 F5_OPT_BIAS = -310
 F6_OPT_BIAS = 390
 
-ITERATIONS = 5
+ITERATIONS = 25
 PARAMS = 4
 
 DATA_IDX = 0
@@ -30,7 +30,7 @@ FUNCTION_IDX = 2
 
 def show_test_output(data, criterion_name, params):
     output_data = FunctionOptimizationData(data[DATA_IDX], ITERATIONS, params, criterion_name)
-    plot_boxplot(data[BOXPLOT_DATA_IDX], params)
+    # plot_boxplot(data[BOXPLOT_DATA_IDX], params)
     output_data.print_stats()
 
 
@@ -52,7 +52,7 @@ def run_tests(function, criterion_name, parameters):
         bound = F6_BOUND
         bias = F6_OPT_BIAS
 
-    # print('Running {} by {} - No runs: {}...'.format(function, criterion_name, ITERATIONS))
+    print('Running {} by {} - No runs: {}...'.format(function, criterion_name, ITERATIONS))
 
     if criterion_name == 'k-iter':
         criterion = run_by_k_iterations_criterion
@@ -64,7 +64,6 @@ def run_tests(function, criterion_name, parameters):
         criterion = run_by_variance_criterion
 
     for i in range(PARAMS):
-        print('Generate boxplot no {}...'.format(i))
         set_parameters(criterion_name, parameters[i], bias)
         runs = run_multiple_optimizations(f, bound, criterion)
 

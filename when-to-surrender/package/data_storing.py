@@ -69,26 +69,13 @@ class FunctionOptimizationData:
         self.criterion_name = criterion_name
 
     def print_stats(self):
-        # print('Param. value\t|\tBest fit\t|\tBest fit mean\t|\tBest fit standard deviation\t|\tNumber of evals mean')
-        print('Param. value;Best fit;Best fit mean;Best fit standard deviation;Number of evals mean')
+        print('Param. value\t|\tBest fit\t|\tBest fit mean\t|\tBest fit standard deviation\t|\tNumber of evals mean')
+        # print('Param. value;Best fit;Best fit mean;Best fit standard deviation;Number of evals mean')
         for i in range(self.number_of_params):
-            # print("{}\t\t|\t{} \t|\t{} \t|\t{} \t|\t{}"
-            print("{};{};{};{};{}"
+            print("{}\t\t|\t{} \t|\t{} \t|\t{} \t|\t{}"
+            # print("{};{};{};{};{}"
                   .format(self.params[i],
                           round(self.crit_data[i][0], DECIMAL_POINTS),
                           round(self.crit_data[i][1], DECIMAL_POINTS),
                           round(self.crit_data[i][2], DECIMAL_POINTS),
                           round(self.crit_data[i][3], DECIMAL_POINTS)))
-
-        # self.plot_best_fits_graph()
-        # tmp_data = numpy.random.normal(100, 10, 200)
-        # plot_boxplot(tmp_data, [1])
-
-    def plot_best_fits_graph(self):
-        fits_values = []
-        for i in range(self.number_of_params):
-            fits_values.append(round(self.crit_data[i][BEST_FITS_IDX]))
-        plot_graph(self.params, fits_values, self.criterion_name, 'Params', 'Best fit mean')
-
-    def plot_evals_graph(self):
-        pass
