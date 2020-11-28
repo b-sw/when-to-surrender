@@ -11,7 +11,7 @@ from package.test import *
 import getopt
 import sys
 
-ARGC = 6
+ARGC = 7
 
 
 def main():
@@ -26,13 +26,15 @@ def main():
         fun = argv[0]
         criterion = argv[1]
         parameters = []
-        for i in range(2, ARGC):
+        for i in range(2, ARGC - 1):
             parameters.append(float(argv[i]))
+        graph_filename = argv[6]
         test_output = run_tests(fun, criterion, parameters)
-        show_test_output(test_output, criterion, parameters)
+        show_test_output(test_output, criterion, parameters, graph_filename)
     else:
         test_output = run_tests('F5', 'sd', [0.05, 0.03, 0.015, 0.01])
-        show_test_output(test_output, 'sd', [0.05, 0.03, 0.015, 0.01])
+        show_test_output(test_output, 'sd', [
+                         0.05, 0.03, 0.015, 0.01], 'tmp_graph')
 
 
 if __name__ == '__main__':

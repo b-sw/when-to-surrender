@@ -20,7 +20,7 @@ F4_OPT_BIAS = -450
 F5_OPT_BIAS = -310
 F6_OPT_BIAS = 390
 
-ITERATIONS = 25
+ITERATIONS = 51
 PARAMS = 4
 
 DATA_IDX = 0
@@ -28,9 +28,10 @@ BOXPLOT_DATA_IDX = 1
 FUNCTION_IDX = 2
 
 
-def show_test_output(data, criterion_name, params):
-    output_data = FunctionOptimizationData(data[DATA_IDX], ITERATIONS, params, criterion_name)
-    # plot_boxplot(data[BOXPLOT_DATA_IDX], params)
+def show_test_output(data, criterion_name, params, graph_filename):
+    output_data = FunctionOptimizationData(
+        data[DATA_IDX], ITERATIONS, params, criterion_name)
+    plot_boxplot(data[BOXPLOT_DATA_IDX], params, graph_filename)
     output_data.print_stats()
 
 
@@ -40,11 +41,13 @@ def run_tests(function, criterion_name, parameters):
     boxplot_data = []
 
     if function == 'F4':
-        f = optproblems.cec2005.F4(DIMENSION)  # Shifted Schwefel’s Problem 1.2 with Noise in Fitness
+        # Shifted Schwefel’s Problem 1.2 with Noise in Fitness
+        f = optproblems.cec2005.F4(DIMENSION)
         bound = F4_BOUND
         bias = F4_OPT_BIAS
     elif function == 'F5':
-        f = optproblems.cec2005.F5(DIMENSION)  # Schwefel’s Problem 2.6 with Global Optimum on Bounds
+        # Schwefel’s Problem 2.6 with Global Optimum on Bounds
+        f = optproblems.cec2005.F5(DIMENSION)
         bound = F5_BOUND
         bias = F5_OPT_BIAS
     else:  # if function == 'F6':
@@ -52,7 +55,8 @@ def run_tests(function, criterion_name, parameters):
         bound = F6_BOUND
         bias = F6_OPT_BIAS
 
-    print('Running {} by {} - No runs: {}...'.format(function, criterion_name, ITERATIONS))
+    print('Running {} by {} - No runs: {}...'.format(function,
+                                                     criterion_name, ITERATIONS))
 
     if criterion_name == 'k-iter':
         criterion = run_by_k_iterations_criterion
