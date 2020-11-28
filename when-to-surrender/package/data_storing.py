@@ -1,8 +1,8 @@
 """
     Name: properties.py
-    Purpose: data aggregation and displaying
+    Purpose:
 
-    @author Bartosz Świtalski, Piotr Frątczak
+    @author
 
     Warsaw University of Technology
     Faculty of Electronics and Information Technology
