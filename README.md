@@ -17,8 +17,17 @@ W optymalizacji za pomocą algorytmów ewolucyjnych ze względów czasowych ogra
 ```
 git clone https://github.com/bartoszswitalski/when-to-surrender.git
 ```
+### Pojedyncze uruchomienie ###
 ```
+/when-to-surrender$ ./xsetup.sh
 /when-to-surrender$ python3 when−to−surrender/main.py <funkcja> <kryterium> <p1> <p2> <p3> <p4> <plik_wykres>
+/when-to-surrender$ ./xclean.sh
+```
+### Skrypt ###
+```
+/when-to-surrender$ ./xsetup.sh
+/when-to-surrender$ ./xscript.sh
+/when-to-surrender$ ./xclean.sh
 ```
 ### Oznaczenia argumentów ###
 * funkcja - optymalizowana funkcja (dozwolone wartości: 'F4', 'F5', 'F6')
