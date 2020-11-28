@@ -7,7 +7,6 @@
     Warsaw University of Technology
     Faculty of Electronics and Information Technology
 """
-from package.visuals import *
 from package.properties import *
 import math
 
@@ -50,30 +49,18 @@ def merge_data(multiple_runs):  # merge [[run1_data], [run2_data], ...] into [me
     return [best_fit_overall, mean_best_fit, best_fit_standard_deviation, mean_evals]
 
 
-class MultipleRunsData:
-
-    def __init__(self, runs_data):
-        self.runs_data = runs_data
-        self.x_label = 'Generation'
-        self.y_label = 'min{Q(X)}'
-        self.title = 'F4'
-
-
 class FunctionOptimizationData:
 
-    def __init__(self, data, iterations, params, criterion_name):
+    def __init__(self, data, params, criterion_name):
         self.crit_data = data
-        # self.iterations = iterations
         self.params = params
         self.number_of_params = len(params)
         self.criterion_name = criterion_name
 
     def print_stats(self):
         print('Param. value\t|\tBest fit\t|\tBest fit mean\t|\tBest fit standard deviation\t|\tNumber of evals mean')
-        # print('Param. value;Best fit;Best fit mean;Best fit standard deviation;Number of evals mean')
         for i in range(self.number_of_params):
             print("{}\t\t|\t{} \t|\t{} \t|\t{} \t|\t{}"
-            # print("{};{};{};{};{}"
                   .format(self.params[i],
                           round(self.crit_data[i][0], DECIMAL_POINTS),
                           round(self.crit_data[i][1], DECIMAL_POINTS),

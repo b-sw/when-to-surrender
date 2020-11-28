@@ -34,8 +34,7 @@ def main():
         show_test_output(test_output, criterion, parameters, graph_filename)
     else:
         test_output = run_tests('F5', 'sd', [0.05, 0.03, 0.015, 0.01])
-        show_test_output(test_output, 'sd', [
-                         0.05, 0.03, 0.015, 0.01], 'tmp_graph')
+        show_test_output(test_output, 'sd', [0.05, 0.03, 0.015, 0.01], 'f5-sd')
 
 
 if __name__ == '__main__':

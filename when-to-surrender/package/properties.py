@@ -8,7 +8,6 @@
     Faculty of Electronics and Information Technology
 """
 from package.genotype import *
-from package.visuals import plot_graph
 import math
 
 BEST_MEMBER = 0
@@ -71,7 +70,6 @@ def calc_list_sd(values, expected):
 
 
 def calc_variance(population):
-    fitness_variance = 0
     expected_fit = calc_fit_ev(population)
     population_size = len(population.members)
 

@@ -36,19 +36,4 @@ def plot_boxplot(data, params, graph_filename):
 
     ax.boxplot(data, labels=params)
 
-    # plt.show()
-    plt.savefig('graphs/' + graph_filename + '.pdf')
-
-
-def plot_graph(x_values, y_values):
-
-    plt.scatter(x_values, y_values, c='r', marker='.', s=1)
-    plt.yscale("log")
-    # plt.xticks(x_values, x_values)
-    # plt.yticks(y_values, y_values)
-
-    plt.title('Single run best fits')
-    plt.xlabel('Number of evals')
-    plt.ylabel('Best fit')
-
-    plt.show()
+    plt.savefig('graphs/' + graph_filename + '.png')

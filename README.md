@@ -21,7 +21,7 @@ git clone https://github.com/bartoszswitalski/when-to-surrender.git
 /when-to-surrender$ python3 when−to−surrender/main.py <funkcja> <kryterium> <p1> <p2> <p3> <p4> <plik_wykres>
 ```
 ### Oznaczenia argumentów ###
-* funkcja - optymalizowana funkcja (dozwolone wartości:F41,F52,F63)
-* kryterium - kryterium przerwania (dozwolone wartości:k-iter,sd,best-worst,variance)
+* funkcja - optymalizowana funkcja (dozwolone wartości: 'F4', 'F5', 'F6')
+* kryterium - kryterium przerwania (dozwolone wartości: 'k-iter', 'sd', 'best-worst', 'variance')
 * pi - kolejne wartości parametru do wcześniej sprecyzowanego kryterium
 * plik_wykres - nazwa pliku do którego zostanie zapisany wykres wynikowy
