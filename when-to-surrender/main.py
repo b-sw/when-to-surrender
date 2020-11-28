@@ -20,6 +20,7 @@ def main():
         0 - function to optimize
         1 - criterion
         2-5 - criterion parameters
+        6 - graph destination file
     """
 
     if len(argv) == ARGC:
