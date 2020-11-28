@@ -1,8 +1,8 @@
 """
     Name: script.py
-    Purpose:
+    Purpose: execution interface
 
-    @author
+    @author Bartosz Świtalski, Piotr Frątczak
 
     Warsaw University of Technology
     Faculty of Electronics and Information Technology

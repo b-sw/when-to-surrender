@@ -1,8 +1,8 @@
 """
     Name: properties.py
-    Purpose:
+    Purpose: computation of population properties and verification of termination criteria
 
-    @author
+    @author Bartosz Świtalski, Piotr Frątczak
 
     Warsaw University of Technology
     Faculty of Electronics and Information Technology

@@ -1,8 +1,8 @@
 """
     Name: optimize.py
-    Purpose:
+    Purpose: termination criteria execution
 
-    @author
+    @author Bartosz Świtalski, Piotr Frątczak
 
     Warsaw University of Technology
     Faculty of Electronics and Information Technology
