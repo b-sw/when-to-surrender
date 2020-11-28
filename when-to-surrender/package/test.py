@@ -12,6 +12,7 @@ import optproblems.cec2005
 
 from package.optimize import *
 from package.data_storing import *
+from package.visuals import *
 
 F4_BOUND = 100
 F5_BOUND = 100
@@ -20,7 +21,7 @@ F4_OPT_BIAS = -450
 F5_OPT_BIAS = -310
 F6_OPT_BIAS = 390
 
-ITERATIONS = 51
+ITERATIONS = 1
 PARAMS = 4
 
 DATA_IDX = 0
@@ -29,8 +30,7 @@ FUNCTION_IDX = 2
 
 
 def show_test_output(data, criterion_name, params, graph_filename):
-    output_data = FunctionOptimizationData(
-        data[DATA_IDX], ITERATIONS, params, criterion_name)
+    output_data = FunctionOptimizationData(data[DATA_IDX], params, criterion_name)
     plot_boxplot(data[BOXPLOT_DATA_IDX], params, graph_filename)
     output_data.print_stats()
 
@@ -55,8 +55,7 @@ def run_tests(function, criterion_name, parameters):
         bound = F6_BOUND
         bias = F6_OPT_BIAS
 
-    print('Running {} by {} - No runs: {}...'.format(function,
-                                                     criterion_name, ITERATIONS))
+    print('Running {} by {} - No runs: {}...'.format(function, criterion_name, ITERATIONS))
 
     if criterion_name == 'k-iter':
         criterion = run_by_k_iterations_criterion

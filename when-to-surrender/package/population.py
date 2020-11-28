@@ -41,7 +41,7 @@ def mate(members, function):
         child_chromosome = []
         parent_1 = random.choice(members)
         parent_2 = random.choice(members)
-        weight = random.uniform(0, 1)
+        weight = random.uniform(MEAN, SIGMA)
 
         for i in range(DIMENSION):
             child_chromosome.append(weight * parent_1.chromosome[i] + (1 - weight) * parent_2.chromosome[i])
@@ -57,7 +57,7 @@ def mutate(genotypes, function, bounds, bias):
         for j in range(DIMENSION):
             x_j = genotypes[i].chromosome[j]
             sigma_j = genotypes[i].sigma[j]
-            x_j = x_j + sigma_j * numpy.random.normal(0, 1)
+            x_j = x_j + sigma_j * numpy.random.normal(MEAN, SIGMA)
             if x_j > bounds:
                 x_j = bounds
             elif x_j < -bounds:
