@@ -18,7 +18,7 @@ W optymalizacji za pomocą algorytmów ewolucyjnych ze względów czasowych ogra
 git clone https://github.com/bartoszswitalski/when-to-surrender.git
 ```
 ```
-/when-to-surrender$ python3 when−to−surrender/main.py <funkcja> <p1> <p2> <p3> <p4> <plik_wykres>
+/when-to-surrender$ python3 when−to−surrender/main.py <funkcja> <kryterium> <p1> <p2> <p3> <p4> <plik_wykres>
 ```
 ### Oznaczenia argumentów ###
 * funkcja - optymalizowana funkcja (dozwolone wartości:F41,F52,F63)
