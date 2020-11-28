@@ -1,8 +1,5 @@
 #!/bin/sh
 
-mkdir output
-mkdir graphs
-
 taskset -c 0 python3 ./when-to-surrender/main.py F4 k-iter 100 150 200 715 f4-k-iter > output/f4-k-iter.txt &
 taskset -c 0 python3 ./when-to-surrender/main.py F4 sd 0.15 0.14 0.13 0.12 f4-sd > output/f4-sd.txt &
 taskset -c 3 python3 ./when-to-surrender/main.py F4 best-worst 0.125 0.1 0.075 0.05 f4-best-worst > output/f4-best-worst.txt &
