@@ -1,8 +1,8 @@
 """
     Name: test.py
-    Purpose:
+    Purpose: benchmark interface
 
-    @author
+    @author Bartosz Świtalski, Piotr Frątczak
 
     Warsaw University of Technology
     Faculty of Electronics and Information Technology

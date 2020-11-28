@@ -1,8 +1,8 @@
 """
     Name: script.py
-    Purpose:
+    Purpose: execution interface
 
-    @author
+    @author Bartosz Świtalski, Piotr Frątczak
 
     Warsaw University of Technology
     Faculty of Electronics and Information Technology
@@ -20,7 +20,7 @@ def main():
         0 - function to optimize
         1 - criterion
         2-5 - criterion parameters
-	6 - graph file name
+        6 - graph destination file
     """
 
     if len(argv) == ARGC:
@@ -35,7 +35,7 @@ def main():
     else:
         test_output = run_tests('F5', 'sd', [0.05, 0.03, 0.015, 0.01])
         show_test_output(test_output, 'sd', [
-                         0.05, 0.03, 0.015, 0.01], 'f5-sd')
+                         0.05, 0.03, 0.015, 0.01], 'tmp_graph')
 
 
 if __name__ == '__main__':

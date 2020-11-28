@@ -1,8 +1,8 @@
 """
     Name: genotype.py
-    Purpose: (mu + lambda) evolutionary strategy
+    Purpose: implementation of (mu + lambda) evolutionary strategy
 
-    @author
+    @author Bartosz Świtalski, Piotr Frątczak
 
     Warsaw University of Technology
     Faculty of Electronics and Information Technology
@@ -20,7 +20,7 @@ SIGMA = 1
 
 def next_sigma(sigma, a):
 
-    b = numpy.random.normal(MEAN, SIGMA)
+    b = numpy.random.normal(0, 1)
     tau = 1 / math.sqrt(2 * DIMENSION)
     tau_prim = 1 / math.sqrt(2 * math.sqrt(DIMENSION))
     sigma_j = sigma * math.exp(tau_prim * a + tau * b)

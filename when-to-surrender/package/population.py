@@ -1,8 +1,8 @@
 """
     Name: population.py
-    Purpose: defining population and its methods(e.g. selection, mating, mutating)
+    Purpose: definition of population and its methods(e.g. selection, mating, mutating)
 
-    @author
+    @author Bartosz Świtalski, Piotr Frątczak
 
     Warsaw University of Technology
     Faculty of Electronics and Information Technology
@@ -20,9 +20,8 @@ LAMBDA = 7 * MU
 def evolution(population, function, bounds, bias):
     selection = select(population, LAMBDA)
     offspring = mate(selection, function)
-    # population.members = mutate(population.members, function, bounds)
     offspring = mutate(offspring, function, bounds, bias)
-    population.members = succession(population.members, offspring, MU)
+    population.members = succeed(population.members, offspring, MU)
     population.generation += 1
 
 
@@ -42,7 +41,7 @@ def mate(members, function):
         child_chromosome = []
         parent_1 = random.choice(members)
         parent_2 = random.choice(members)
-        weight = random.uniform(MEAN, SIGMA)
+        weight = random.uniform(0, 1)
 
         for i in range(DIMENSION):
             child_chromosome.append(weight * parent_1.chromosome[i] + (1 - weight) * parent_2.chromosome[i])
@@ -73,7 +72,7 @@ def mutate(genotypes, function, bounds, bias):
     return genotypes
 
 
-def succession(current_generation, children, population_size):
+def succeed(current_generation, children, population_size):
     next_generation = current_generation + children
     next_generation = sorted(next_generation, key=lambda x: x.fitness)
 
@@ -87,9 +86,9 @@ class Population:
         self.members = members
 
     @classmethod
-    def rand_population(cls, size, function, bound):  # single bound because most functions in the benchmark
+    def rand_population(cls, size, function, bound):  # single bound because most functions in the benchmark have symmetrical bounds [-x,x]
 
-        members = []  # have bounds of additive inverses [-x,x]
+        members = []
 
         for j in range(size):
             x = []

@@ -1,8 +1,8 @@
 """
     Name: visuals.py
-    Purpose:
+    Purpose: creation of visual presentation of the results
 
-    @author
+    @author Bartosz Świtalski, Piotr Frątczak
 
     Warsaw University of Technology
     Faculty of Electronics and Information Technology
@@ -37,7 +37,7 @@ def plot_boxplot(data, params, graph_filename):
     ax.boxplot(data, labels=params)
 
     # plt.show()
-    plt.savefig('graphs/' + graph_filename + '.png')
+    plt.savefig('graphs/' + graph_filename + '.pdf')
 
 
 def plot_graph(x_values, y_values):
